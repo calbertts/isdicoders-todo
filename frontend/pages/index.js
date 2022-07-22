@@ -4,7 +4,6 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import Snackbar from '@mui/material/Snackbar';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-
 import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -17,7 +16,14 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Chip from '@mui/material/Chip';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+
 import EditDialog from './EditDialog';
+import {
+  getTaskList,
+  createTask,
+  updateTask,
+  deleteTask,
+} from '../lib/browser-api';
 
 export default function Home(props) {
   const taskList = props.taskList;
@@ -176,40 +182,3 @@ export async function getServerSideProps() {
   };
 }
 
-async function getTaskList() {
-  console.log(process.env.NEXT_PUBLIC_FRONTEND_API_HOST)
-  const res = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_API_HOST}/api/todo`);
-  const json = await res.json();
-
-  return json;
-}
-
-async function createTask(task) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_API_HOST}/api/todo`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(task),
-  });
-
-  return await res.json();
-}
-
-async function updateTask(task) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_API_HOST}/api/todo/${task.id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(task),
-  });
-
-  return await res.json();
-}
-
-async function deleteTask(task) {
-  await fetch(`${process.env.NEXT_PUBLIC_FRONTEND_API_HOST}/api/todo/${task.id}`, {
-    method: 'DELETE',
-  });
-}

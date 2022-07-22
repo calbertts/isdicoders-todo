@@ -17,9 +17,9 @@ COPY --chown=node:node ./pages ./pages
 COPY --chown=node:node ./public ./public
 COPY --chown=node:node ./.env.production ./.env.production
 
-RUN rm -rf .next
-RUN npm i
-RUN npm run build
+RUN rm -rf .next \
+    npm i \
+    npm run build
 
 COPY --chown=node:node ./.next ./.next
 
@@ -27,5 +27,6 @@ EXPOSE 8080/tcp
 
 ENV PORT=3002
 ENV NODE_ENV=production
+
 CMD ["npm", "start"]
 
