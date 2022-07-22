@@ -4,3 +4,4 @@ dist
 build
 .vim
 Session.vim
+coverage

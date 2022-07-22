@@ -20,9 +20,17 @@ export function Get(params?: string): Function {
     const original: Function = descriptor.value;
     descriptor.value = async function _get(req: Request, res: Response) {
       try {
-        console.log('GET', req.url, `params=[${JSON.stringify(req.params)}]`, `query=[${JSON.stringify(req.query)}]`);
+        console.log(
+          'GET',
+          req.url,
+          `params=[${JSON.stringify(req.params)}]`,
+          `query=[${JSON.stringify(req.query)}]`
+        );
 
-        const object: unknown = await original.apply(this, [req.params, req.query]);
+        const object: unknown = await original.apply(this, [
+          req.params,
+          req.query,
+        ]);
         res.status(200).json(object);
       } catch (err) {
         const message: string = (err as Error).message;
@@ -55,7 +63,13 @@ export function Put(params?: string): Function {
     const original: Function = descriptor.value;
     descriptor.value = async function _put(req: Request, res: Response) {
       try {
-        console.log('PUT', req.url, `params=[${JSON.stringify(req.params)}]`, `body=[${JSON.stringify(req.body)}]`, `query=[${JSON.stringify(req.query)}]`);
+        console.log(
+          'PUT',
+          req.url,
+          `params=[${JSON.stringify(req.params)}]`,
+          `body=[${JSON.stringify(req.body)}]`,
+          `query=[${JSON.stringify(req.query)}]`
+        );
 
         const object: unknown = await original.apply(this, [
           req.params,
@@ -94,9 +108,17 @@ export function Delete(params?: string): Function {
     const original: Function = descriptor.value;
     descriptor.value = async function _delete(req: Request, res: Response) {
       try {
-        console.log('DELETE', req.url, `params=[${JSON.stringify(req.params)}]`, `query=[${JSON.stringify(req.query)}]`);
+        console.log(
+          'DELETE',
+          req.url,
+          `params=[${JSON.stringify(req.params)}]`,
+          `query=[${JSON.stringify(req.query)}]`
+        );
 
-        const object: unknown = await original.apply(this, [req.params, req.query]);
+        const object: unknown = await original.apply(this, [
+          req.params,
+          req.query,
+        ]);
         res.status(200).json(object);
       } catch (err) {
         const message: string = (err as Error).message;
@@ -129,9 +151,17 @@ export function Post(params?: string): Function {
     const original: Function = descriptor.value;
     descriptor.value = async function _post(req: Request, res: Response) {
       try {
-        console.log('POST', req.url, `body=[${JSON.stringify(req.body)}]`, `params=[${JSON.stringify(req.params)}]`);
+        console.log(
+          'POST',
+          req.url,
+          `body=[${JSON.stringify(req.body)}]`,
+          `params=[${JSON.stringify(req.params)}]`
+        );
 
-        const response: unknown = await original.apply(this, [req.body, req.params]);
+        const response: unknown = await original.apply(this, [
+          req.body,
+          req.params,
+        ]);
         res.status(201).json(response);
       } catch (err) {
         const message: string = (err as Error).message;
@@ -154,6 +184,7 @@ export function Post(params?: string): Function {
  *
  * @param target Class to be decorated
  */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export function Controller(target: any) {
   return new Proxy(target, {
     construct(clz, args) {

@@ -1,4 +1,3 @@
-import {Task} from '../../src/domain/Task';
 import {TaskController} from '../../src/framework/TaskController';
 import {TaskNotFound} from '../../src/domain/TaskNotFound';
 import TaskUseCases from '../../src/application/TaskUseCases';
@@ -7,7 +6,9 @@ import {MemoryTaskRepositoy} from '../../src/framework/MemoryTaskRepository';
 jest.mock('../../src/application/TaskUseCases');
 
 describe('TaskController && UseCases', () => {
-  const taskUseCasesMock = new TaskUseCases(new MemoryTaskRepositoy()) as jest.Mocked<TaskUseCases>;
+  const taskUseCasesMock = new TaskUseCases(
+    new MemoryTaskRepositoy()
+  ) as jest.Mocked<TaskUseCases>;
   const taskController = new TaskController(taskUseCasesMock);
 
   it('should create a task', async () => {
@@ -107,7 +108,7 @@ describe('TaskController && UseCases', () => {
   it('should update a task', async () => {
     const req = {
       params: {
-        id: 'any-id'
+        id: 'any-id',
       },
       body: {
         task: {
@@ -137,8 +138,8 @@ describe('TaskController && UseCases', () => {
   it('should delete a task', async () => {
     const req = {
       params: {
-        id: 'any-id'
-      }
+        id: 'any-id',
+      },
     };
     const jsonMock = jest.fn();
     const statusMock = jest.fn().mockImplementation(() => {

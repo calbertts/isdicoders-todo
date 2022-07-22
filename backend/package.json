@@ -6,11 +6,10 @@
   "scripts": {
     "start": "node ./build/src/framework/Main.js",
     "test": "jest --coverage",
-    "lint": "gts lint",
-    "clean": "gts clean",
+    "lint": "eslint .",
+    "fix": "eslint --fix .",
     "compile": "tsc",
     "compile-watch": "tsc -w",
-    "fix": "gts fix",
     "prepare": "npm run compile",
     "docker-build": "docker build -t isdicoders/bk-todo:v1 ."
   },

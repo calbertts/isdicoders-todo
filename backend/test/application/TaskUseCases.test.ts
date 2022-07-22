@@ -1,9 +1,9 @@
-import { createMock } from 'ts-auto-mock';
+import {createMock} from 'ts-auto-mock';
 import TaskUseCases from '../../src/application/TaskUseCases';
 import {IGenericRepository} from '../../src/domain/IGenericRepository';
 import {Task} from '../../src/domain/Task';
 
-describe.only('TaskUseCases', () => {
+describe('TaskUseCases', () => {
   const repositoryMock = createMock<IGenericRepository<Task>>();
   const taskUseCases = new TaskUseCases(repositoryMock);
 

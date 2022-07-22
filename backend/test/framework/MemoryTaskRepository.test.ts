@@ -82,9 +82,9 @@ describe('MemoryTaskRepositoy', () => {
   });
 
   it('should fail when updating a task is not found', async () => {
-    await expect(memoryTaskRepositoy.update('non-existing-task', {} as Task)).rejects.toThrow(
-      TaskNotFound
-    );
+    await expect(
+      memoryTaskRepositoy.update('non-existing-task', {} as Task)
+    ).rejects.toThrow(TaskNotFound);
   });
 
   it('should delete a task', async () => {
@@ -104,8 +104,8 @@ describe('MemoryTaskRepositoy', () => {
   });
 
   it('should fail when deleting a task is not found', async () => {
-    await expect(memoryTaskRepositoy.delete('non-existing-task')).rejects.toThrow(
-      TaskNotFound
-    );
+    await expect(
+      memoryTaskRepositoy.delete('non-existing-task')
+    ).rejects.toThrow(TaskNotFound);
   });
 });

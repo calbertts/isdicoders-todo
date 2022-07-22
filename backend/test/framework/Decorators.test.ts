@@ -8,7 +8,7 @@ import {
   Delete,
 } from '../../src/framework/Decorators';
 
-describe.only('Decorators', () => {
+describe('Decorators', () => {
   it('should decorate with @Controller a class with HTTP methods', () => {
     @Controller
     class ControllerClass {
@@ -19,10 +19,10 @@ describe.only('Decorators', () => {
       post() {}
 
       @Put('/:id')
-      put(_params: {id: string}) {}
+      put() {}
 
       @Delete('/:id')
-      delete(_params: {id: string}) {}
+      delete() {}
 
       otherMethod() {}
     }
@@ -47,7 +47,7 @@ describe.only('Decorators', () => {
     class ControllerClass {
       @Post('/:param')
       post(): Promise<boolean> {
-        return Promise.resolve(true)
+        return Promise.resolve(true);
       }
 
       @Post()
@@ -83,7 +83,10 @@ describe.only('Decorators', () => {
         status: statusMock,
       };
 
-      await Reflect.apply(controllerInstance.post, controllerInstance, [req, res]);
+      await Reflect.apply(controllerInstance.post, controllerInstance, [
+        req,
+        res,
+      ]);
 
       expect(statusMock).toBeCalledWith(201);
       expect(jsonMock).toBeCalledWith(true);
@@ -102,7 +105,10 @@ describe.only('Decorators', () => {
         send: sendMock,
       };
 
-      await Reflect.apply(controllerInstance.postError, controllerInstance, [req, res]);
+      await Reflect.apply(controllerInstance.postError, controllerInstance, [
+        req,
+        res,
+      ]);
 
       expect(statusMock).toBeCalledWith(500);
       expect(sendMock).toBeCalledWith('Post Error');
@@ -118,7 +124,7 @@ describe.only('Decorators', () => {
       }
 
       @Put()
-      putError(..._args: Array<unknown>): Promise<boolean> {
+      putError(): Promise<boolean> {
         throw new Error('Put Error');
       }
 
@@ -150,7 +156,10 @@ describe.only('Decorators', () => {
         status: statusMock,
       };
 
-      await Reflect.apply(controllerInstance.put, controllerInstance, [req, res]);
+      await Reflect.apply(controllerInstance.put, controllerInstance, [
+        req,
+        res,
+      ]);
 
       expect(statusMock).toBeCalledWith(200);
       expect(jsonMock).toBeCalledWith(true);
@@ -169,7 +178,10 @@ describe.only('Decorators', () => {
         send: sendMock,
       };
 
-      await Reflect.apply(controllerInstance.putError, controllerInstance, [req, res]);
+      await Reflect.apply(controllerInstance.putError, controllerInstance, [
+        req,
+        res,
+      ]);
 
       expect(statusMock).toBeCalledWith(500);
       expect(sendMock).toBeCalledWith('Put Error');
@@ -217,7 +229,10 @@ describe.only('Decorators', () => {
         status: statusMock,
       };
 
-      await Reflect.apply(controllerInstance.delete, controllerInstance, [req, res]);
+      await Reflect.apply(controllerInstance.delete, controllerInstance, [
+        req,
+        res,
+      ]);
 
       expect(statusMock).toBeCalledWith(200);
       expect(jsonMock).toBeCalledWith(true);
@@ -236,7 +251,10 @@ describe.only('Decorators', () => {
         send: sendMock,
       };
 
-      await Reflect.apply(controllerInstance.deleteError, controllerInstance, [req, res]);
+      await Reflect.apply(controllerInstance.deleteError, controllerInstance, [
+        req,
+        res,
+      ]);
 
       expect(statusMock).toBeCalledWith(500);
       expect(sendMock).toBeCalledWith('Delete Error');
@@ -284,7 +302,10 @@ describe.only('Decorators', () => {
         status: statusMock,
       };
 
-      await Reflect.apply(controllerInstance.get, controllerInstance, [req, res]);
+      await Reflect.apply(controllerInstance.get, controllerInstance, [
+        req,
+        res,
+      ]);
 
       expect(statusMock).toBeCalledWith(200);
       expect(jsonMock).toBeCalledWith(true);
@@ -303,7 +324,10 @@ describe.only('Decorators', () => {
         send: sendMock,
       };
 
-      await Reflect.apply(controllerInstance.getError, controllerInstance, [req, res]);
+      await Reflect.apply(controllerInstance.getError, controllerInstance, [
+        req,
+        res,
+      ]);
 
       expect(statusMock).toBeCalledWith(500);
       expect(sendMock).toBeCalledWith('Get Error');

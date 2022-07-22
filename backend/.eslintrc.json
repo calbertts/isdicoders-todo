@@ -1,13 +1,9 @@
 {
   "extends": "./node_modules/gts/",
   "ignorePatterns": ["**/dist/*.js"],
-  "no-unused-vars": "off",
-  "@typescript-eslint/no-unused-vars": [
-    "warn",
-    { 
-      "argsIgnorePattern": "^_.*",
-      "varsIgnorePattern": "^_",
-      "caughtErrorsIgnorePattern": "^_"
-    }
-  ]
+  "rules": {
+    "node/no-unpublished-import": ["error", {
+        "allowModules": ["ts-auto-mock", "jest-ts-auto-mock"]
+    }]
+  }
 }

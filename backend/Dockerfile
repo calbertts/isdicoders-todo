@@ -16,9 +16,10 @@ COPY --chown=node:node package-lock.json package.json ./
 COPY --chown=node:node ./src ./src
 COPY --chown=node:node ./tsconfig.json ./
 
-RUN npm i
-RUN npm run compile
+RUN npm i \
+    npm run compile
 
 ENV PORT=80
 ENV NODE_ENV=production
+
 CMD ["node", "build/src/framework/Main.js"]
