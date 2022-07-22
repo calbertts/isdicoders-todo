@@ -9,4 +9,4 @@ services:
       - todoapp.isdicoders
 
   todoapp.isdicoders:
-    build: ./backend2
+    build: ./backend
