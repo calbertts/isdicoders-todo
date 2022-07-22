@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3002:3002"
+    links:
+      - todoapp.isdicoders
+
+  todoapp.isdicoders:
+    build: ./backend2
